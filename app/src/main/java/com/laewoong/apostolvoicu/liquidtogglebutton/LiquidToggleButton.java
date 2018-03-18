@@ -279,6 +279,8 @@ public class LiquidToggleButton extends android.support.v7.widget.AppCompatButto
         mFinalPath.op(mThumbPath, Path.Op.DIFFERENCE);
 
         PathMeasure pm = new PathMeasure(mFinalPath, true);
+        final float SEGMENT_NUM = 20f;
+        final float SEGMENT_LENGHT = pm.getLength()/SEGMENT_NUM; // if you delete or move this line, pm.nextContour() mehtod doesn't work I intended.
 
         if(pm.nextContour()) {
 
@@ -286,9 +288,7 @@ public class LiquidToggleButton extends android.support.v7.widget.AppCompatButto
         }
         else {
 
-            final float SEGMENT_NUM = 20f;
-
-            DiscretePathEffect discretePathEffect= new DiscretePathEffect(pm.getLength()/SEGMENT_NUM, 0);
+            DiscretePathEffect discretePathEffect= new DiscretePathEffect(SEGMENT_LENGHT, 0);
             CornerPathEffect cornerPathEffect = new CornerPathEffect(50);
             ComposePathEffect pathEffect = new ComposePathEffect(cornerPathEffect, discretePathEffect);
 
