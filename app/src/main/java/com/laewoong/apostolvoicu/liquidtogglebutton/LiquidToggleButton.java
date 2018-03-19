@@ -280,7 +280,7 @@ public class LiquidToggleButton extends android.support.v7.widget.AppCompatButto
 
         PathMeasure pm = new PathMeasure(mFinalPath, true);
         final float SEGMENT_NUM = 20f;
-        final float SEGMENT_LENGHT = pm.getLength()/SEGMENT_NUM; // if you delete or move this line, pm.nextContour() mehtod doesn't work I intended.
+        final float SEGMENT_LENGHT = pm.getLength()/SEGMENT_NUM; // If you delete or move this line, pm.nextContour() method doesn't work I intended.
 
         if(pm.nextContour()) {
 
