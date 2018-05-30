@@ -7,6 +7,7 @@ import android.animation.Keyframe;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ComposePathEffect;
@@ -34,7 +35,7 @@ import android.view.animation.LinearInterpolator;
 public class LiquidToggleButton extends android.support.v7.widget.AppCompatButton {
 
     private static final String TAG = "LiquidToggleButton";
-    private static final int THUMB_ANIMATION_DURATION = 1300;
+    private static final int THUMB_ANIMATION_DURATION = 1000;
 
     private int canvasWidth;
     private int canvasHeight;
@@ -55,7 +56,6 @@ public class LiquidToggleButton extends android.support.v7.widget.AppCompatButto
     private AnimatorSet mToggleAnimator;
 
     private Path mThumbPath;
-    private Path mTrackPath;
     private Path mFinalPath;
 
     private Paint mTrackPaint;
@@ -64,12 +64,21 @@ public class LiquidToggleButton extends android.support.v7.widget.AppCompatButto
         super(context, attrs);
         setBackground(null);
 
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LiquidToggleButton);
+        try {
+            if (a != null) {
+
+                mUncheckedColor     = a.getColor(R.styleable.LiquidToggleButton_uncheckedColor, 0xffd5505b);
+                mCheckedColor       = a.getColor(R.styleable.LiquidToggleButton_checkedColor, 0xff3dbf87);
+            }
+        } finally {
+            if (a != null) a.recycle();
+        }
+
+        mCurParentBgColor   = mUncheckedColor;
+
         canvasWidth     = 0;
         canvasHeight    = 0;
-
-        mUncheckedColor     = Color.parseColor("#d5505b");
-        mCheckedColor       = Color.parseColor("#3dbf87");
-        mCurParentBgColor   = mUncheckedColor;
 
         mThumbRotation  = 0;
         mCurThumbRadius = 0;
@@ -81,7 +90,6 @@ public class LiquidToggleButton extends android.support.v7.widget.AppCompatButto
         mIsAnimate = false;
 
         mThumbPath = new Path();
-        mTrackPath = new Path();
         mFinalPath = new Path();
 
         mTrackPaint = new Paint(Paint.ANTI_ALIAS_FLAG);

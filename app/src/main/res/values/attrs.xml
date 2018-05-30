@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LiquidToggleButton">
+        <attr name="uncheckedColor" format="color|reference" />
+        <attr name="checkedColor" format="color|reference" />
+    </declare-styleable>
+</resources>
