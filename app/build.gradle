@@ -1,9 +1,12 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.laewooong'
 
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.laewoong.apostolvoicu.liquidtogglebutton"
+        //applicationId "com.laewoong.apostolvoicu.liquidtogglebutton"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
