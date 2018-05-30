@@ -9,7 +9,6 @@ import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.ComposePathEffect;
 import android.graphics.CornerPathEffect;
 import android.graphics.DiscretePathEffect;
@@ -40,6 +39,7 @@ public class LiquidToggleButton extends android.support.v7.widget.AppCompatButto
     private int canvasWidth;
     private int canvasHeight;
 
+    private int mButtonColor;
     private int mUncheckedColor;
     private int mCheckedColor;
     private int mCurParentBgColor;
@@ -68,6 +68,7 @@ public class LiquidToggleButton extends android.support.v7.widget.AppCompatButto
         try {
             if (a != null) {
 
+                mButtonColor        = a.getColor(R.styleable.LiquidToggleButton_buttonColor, 0xffDDDDE0);
                 mUncheckedColor     = a.getColor(R.styleable.LiquidToggleButton_uncheckedColor, 0xffd5505b);
                 mCheckedColor       = a.getColor(R.styleable.LiquidToggleButton_checkedColor, 0xff3dbf87);
             }
@@ -93,7 +94,7 @@ public class LiquidToggleButton extends android.support.v7.widget.AppCompatButto
         mFinalPath = new Path();
 
         mTrackPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mTrackPaint.setColor(Color.parseColor("#DDDDE0"));
+        mTrackPaint.setColor(mButtonColor);
     }
 
     public void setChecked(boolean checked) {
